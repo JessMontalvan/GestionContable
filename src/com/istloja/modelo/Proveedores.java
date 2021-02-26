@@ -10,38 +10,34 @@ package com.istloja.modelo;
  * @author jssmontalvan
  */
 public class Proveedores {
-    private int idProveedores;
+    private String idProveedores;
     private String ruc;
     private String RazonSocial;
     private String TipoActividad;
     private String NombreRepresentanteLegal;
     private String ApellidoRepresentanteLegal;
-    private String telefono;
-    private String correo;
+    private String telefonoProveedor;
+    private String correoProveedor;
 
     public Proveedores() {
     }
 
-    public Proveedores(int idProveedores, String ruc, String RazonSocial, String TipoActividad, String NombreRepresentanteLegal, String ApellidoRepresentanteLegal, String telefono, String correo) {
+    public Proveedores(String idProveedores, String ruc, String RazonSocial, String TipoActividad, String NombreRepresentanteLegal, String ApellidoRepresentanteLegal, String telefono, String correo) {
         this.idProveedores = idProveedores;
         this.ruc = ruc;
         this.RazonSocial = RazonSocial;
         this.TipoActividad = TipoActividad;
         this.NombreRepresentanteLegal = NombreRepresentanteLegal;
         this.ApellidoRepresentanteLegal = ApellidoRepresentanteLegal;
-        this.telefono = telefono;
-        this.correo = correo;
+        this.telefonoProveedor = telefonoProveedor;
+        this.correoProveedor = correoProveedor;
     }
 
-   
-    
-    
-
-    public int getIdProveedores() {
+    public String getIdProveedores() {
         return idProveedores;
     }
 
-    public void setIdProveedores(int idProveedores) {
+    public void setIdProveedores(String idProveedores) {
         this.idProveedores = idProveedores;
     }
 
@@ -85,26 +81,29 @@ public class Proveedores {
         this.ApellidoRepresentanteLegal = ApellidoRepresentanteLegal;
     }
 
-    public String getTelefono() {
-        return telefono;
+    public String getTelefonoProveedor() {
+        return telefonoProveedor;
     }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
+    public void setTelefonoProveedor(String telefonoProveedor) {
+        this.telefonoProveedor = telefonoProveedor;
     }
 
-    public String getCorreo() {
-        return correo;
+    public String getCorreoProveedor() {
+        return correoProveedor;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setCorreoProveedor(String correoProveedor) {
+        this.correoProveedor = correoProveedor;
     }
 
     @Override
     public String toString() {
-        return "Proveedores{" + "idProveedores=" + idProveedores + ", ruc=" + ruc + ", RazonSocial=" + RazonSocial + ", TipoActividad=" + TipoActividad + ", NombreRepresentanteLegal=" + NombreRepresentanteLegal + ", ApellidoRepresentanteLegal=" + ApellidoRepresentanteLegal + ", telefono=" + telefono + ", correo=" + correo + '}';
+        return "Proveedores{" + "idProveedores=" + idProveedores + ", ruc=" + ruc + ", RazonSocial=" + RazonSocial + ", TipoActividad=" + TipoActividad + ", NombreRepresentanteLegal=" + NombreRepresentanteLegal + ", ApellidoRepresentanteLegal=" + ApellidoRepresentanteLegal + ", telefonoProveedor=" + telefonoProveedor + ", correoProveedor=" + correoProveedor + '}';
     }
+
+   
+  
     
     
     

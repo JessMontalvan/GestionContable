@@ -5,6 +5,7 @@
  */
 package com.istloja.ModelPersona;
 
+import com.istloja.modelo.Inventario;
 import com.istloja.modelo.Persona;
 import com.istloja.modelo.Proveedores;
 
@@ -15,4 +16,5 @@ import com.istloja.modelo.Proveedores;
 public interface ComunicacionVistasModelosTablas {
      void clickPersona (Persona p);
      void clickProveedores (Proveedores p);
+     void clickInventario (Inventario p);
 }

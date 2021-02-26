@@ -27,7 +27,7 @@ public class Proveedoresbd {
         //Conexion con la base de datos.
         Connection con = null;
         //INSERT INTO `ejercicio`.`persona` (`idpersona`, `cedula`, `nombres`, `apellidos`, `direccion`, `correo`, `telefono`) VALUES ('1', '1104268899', 'John', 'Solano', 'Loja', 'jpsolanoc@gmail.com', '072587392');
-        String sql = "INSERT INTO `ejercicio`.`proveedores` (`ruc`, `razon_social`, `tipo_actividad`, `nombre_representante_legal`, `apellido_representante_legal`, `telefono`, `correo`) VALUES ('"+proveedor.getRuc()+"', '"+proveedor.getRazonSocial()+"', '"+proveedor.getTipoActividad()+"', '"+proveedor.getNombreRepresentanteLegal()+"', '"+proveedor.getApellidoRepresentanteLegal()+"', '"+proveedor.getTelefono()+"', '"+proveedor.getCorreo()+"');";
+        String sql = "INSERT INTO `ejercicio`.`proveedores` (`ruc`, `razon_social`, `tipo_actividad`, `nombre_representante_legal`, `apellido_representante_legal`, `telefono`, `correo`) VALUES ('"+proveedor.getRuc()+"', '"+proveedor.getRazonSocial()+"', '"+proveedor.getTipoActividad()+"', '"+proveedor.getNombreRepresentanteLegal()+"', '"+proveedor.getApellidoRepresentanteLegal()+"', '"+proveedor.getTelefonoProveedor()+"', '"+proveedor.getCorreoProveedor()+"');";
         try {
             //Es una instancia de la conexion previamente creada.
             Conexion conexion = new Conexion();
@@ -51,7 +51,7 @@ public class Proveedoresbd {
         // retorno del metodo cuando se realice la actualizacion
         boolean actualizar = false;
         //Contatenando la opcion de actualizacion
-        String sql = "UPDATE `ejercicio`.`proveedores` SET `ruc` = '"+proveedor.getRuc()+"', `razon_social` = '"+proveedor.getRazonSocial()+"', `tipo_actividad` = '"+proveedor.getTipoActividad()+"', `nombre_representante_legal` = '"+proveedor.getNombreRepresentanteLegal()+"', `apellido_representante_legal` = '"+proveedor.getApellidoRepresentanteLegal()+"', `telefono` = '"+proveedor.getTelefono()+"', `correo` = '"+proveedor.getCorreo()+"' WHERE (`id_proveedores` = '"+proveedor.getIdProveedores()+"');";
+        String sql = "UPDATE `ejercicio`.`proveedores` SET `ruc` = '"+proveedor.getRuc()+"', `razon_social` = '"+proveedor.getRazonSocial()+"', `tipo_actividad` = '"+proveedor.getTipoActividad()+"', `nombre_representante_legal` = '"+proveedor.getNombreRepresentanteLegal()+"', `apellido_representante_legal` = '"+proveedor.getApellidoRepresentanteLegal()+"', `telefono` = '"+proveedor.getTelefonoProveedor()+"', `correo` = '"+proveedor.getCorreoProveedor()+"' WHERE (`idproveedores` = '"+proveedor.getIdProveedores()+"');";
         try {
             Conexion con = new Conexion();
             connect = con.conectarBaseDatos();
@@ -69,7 +69,7 @@ public class Proveedoresbd {
         Connection connect = null;
         Statement stm = null;
         boolean eliminar = false;
-        String sql = "DELETE FROM `ejercicio`.`proveedores` WHERE (`id_proveedores` = '"+proveedor.getIdProveedores()+"');";
+        String sql = "DELETE FROM `ejercicio`.`proveedores` WHERE (`idproveedores` = '"+proveedor.getIdProveedores()+"');";
         try {
             connect = new Conexion().conectarBaseDatos();
             stm = connect.createStatement();
@@ -83,26 +83,24 @@ public class Proveedoresbd {
     
      //Sirve para traer todos los registros de persona de la base de datos 
     public List<Proveedores> obtenerProveedores() {
-        Connection co = null;
-        Statement stm = null;
-        //Sentencia de JDBC para obtener valores de la base de datos.
-        ResultSet rs = null;
+        
         String sql = "SELECT * FROM ejercicio.proveedores;";
         List<Proveedores> listaProveedores = new ArrayList<Proveedores>();
         try {
-            co = new Conexion().conectarBaseDatos();
-            stm = co.createStatement();
-            rs = stm.executeQuery(sql);
+             Connection co = new Conexion().conectarBaseDatos();
+            Statement stm = co.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
             while (rs.next()) {
                 Proveedores c = new Proveedores();
-                c.setIdProveedores(rs.getInt(1));
+                c.setIdProveedores(rs.getString(1));
                 c.setRuc(rs.getString(2));
                 c.setRazonSocial(rs.getString(3));
                 c.setTipoActividad(rs.getString(4));
                 c.setNombreRepresentanteLegal(rs.getString(5));
                 c.setApellidoRepresentanteLegal(rs.getString(6));
-                c.setTelefono(rs.getString(7));
-                c.setCorreo(rs.getString(8));
+                c.setTelefonoProveedor(rs.getString(7));
+                c.setCorreoProveedor(rs.getString(8));
+                
                 listaProveedores.add(c);
             }
             stm.close();
@@ -113,5 +111,198 @@ public class Proveedoresbd {
         }
 
         return listaProveedores;
+    }
+    public List<Proveedores> getProveedorRuc (String ruc) {
+
+        List<Proveedores> ProveedorEncontrado = new ArrayList<>();
+        String sql = "SELECT * FROM ejercicio.persona WHERE cedula LIKE \"%" + ruc + "%\"";
+        try {
+            
+            Connection co = new Conexion().conectarBaseDatos();
+            Statement stm = co.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                Proveedores c = new Proveedores();
+                c.setRuc(rs.getString(1));
+                c.setRazonSocial(rs.getString(2));
+                c.setTipoActividad(rs.getString(3));
+                c.setNombreRepresentanteLegal(rs.getString(4));
+                c.setApellidoRepresentanteLegal(rs.getString(5));
+                c.setTelefonoProveedor(rs.getString(6));
+                c.setCorreoProveedor(rs.getString(7));
+                ProveedorEncontrado.add(c);
+            }
+            stm.close();
+            rs.close();
+            co.close();
+        } catch (SQLException e) {
+            System.out.println("Error:" + e.getMessage());
+        }
+        return ProveedorEncontrado;
+    }
+
+    public List<Proveedores> getProveedorRazonSocial (String RazonSocial) {
+
+        List<Proveedores> ProveedorEncontrado = new ArrayList<>();
+        String sql = "SELECT * FROM ejercicio.persona WHERE nombres LIKE \"%" + RazonSocial + "%\"";
+        try {
+           Connection co = new Conexion().conectarBaseDatos();
+            Statement stm = co.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                Proveedores c = new Proveedores();
+                c.setRuc(rs.getString(1));
+                c.setRazonSocial(rs.getString(2));
+                c.setTipoActividad(rs.getString(3));
+                c.setNombreRepresentanteLegal(rs.getString(4));
+                c.setApellidoRepresentanteLegal(rs.getString(5));
+                c.setTelefonoProveedor(rs.getString(6));
+                c.setCorreoProveedor(rs.getString(7));
+                ProveedorEncontrado.add(c);
+            }
+            stm.close();
+            rs.close();
+            co.close();
+        } catch (SQLException e) {
+            System.out.println("Error:" + e.getMessage());
+        }
+        return ProveedorEncontrado;
+    }
+
+    public List<Proveedores> getTipoActividad(String TipoActividad) {
+
+        List<Proveedores> ProveedorEncontrado = new ArrayList<>();
+        String sql = "SELECT * FROM ejercicio.persona WHERE apellidos LIKE \"%" + TipoActividad + "%\"";
+        try {
+            Connection co = new Conexion().conectarBaseDatos();
+            Statement stm = co.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                Proveedores c = new Proveedores();
+                c.setRuc(rs.getString(1));
+                c.setRazonSocial(rs.getString(2));
+                c.setTipoActividad(rs.getString(3));
+                c.setNombreRepresentanteLegal(rs.getString(4));
+                c.setApellidoRepresentanteLegal(rs.getString(5));
+                c.setTelefonoProveedor(rs.getString(6));
+                c.setCorreoProveedor(rs.getString(7));
+                ProveedorEncontrado.add(c);
+            }
+            stm.close();
+            rs.close();
+            co.close();
+        } catch (SQLException e) {
+            System.out.println("Error:" + e.getMessage());
+        }
+        return ProveedorEncontrado;
+    }
+
+    public List<Proveedores> getNombreRepresentante (String NombreRepresentante) {
+
+        List<Proveedores> ProveedorEncontrado = new ArrayList<>();
+        String sql = "SELECT * FROM ejercicio.persona WHERE direccion LIKE \"%" + NombreRepresentante + "%\"";
+        try {
+            Connection co = new Conexion().conectarBaseDatos();
+            Statement stm = co.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                Proveedores c = new Proveedores();
+               c.setRuc(rs.getString(1));
+                c.setRazonSocial(rs.getString(2));
+                c.setTipoActividad(rs.getString(3));
+                c.setNombreRepresentanteLegal(rs.getString(4));
+                c.setApellidoRepresentanteLegal(rs.getString(5));
+                c.setTelefonoProveedor(rs.getString(6));
+                c.setCorreoProveedor(rs.getString(7));
+                ProveedorEncontrado.add(c);
+            }
+            stm.close();
+            rs.close();
+            co.close();
+        } catch (SQLException e) {
+            System.out.println("Error:" + e.getMessage());
+        }
+        return ProveedorEncontrado;
+    }
+
+    public List<Proveedores> getApellidoRepresentante(String ApellidoRepresentante) {
+        
+        List<Proveedores> ProveedorEncontrado = new ArrayList<>();
+        String sql = "SELECT * FROM ejercicio.persona WHERE correo LIKE \"%" + ApellidoRepresentante + "%\"";
+        try {
+            Connection co = new Conexion().conectarBaseDatos();
+            Statement stm = co.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                Proveedores c = new Proveedores();
+                c.setRuc(rs.getString(1));
+                c.setRazonSocial(rs.getString(2));
+                c.setTipoActividad(rs.getString(3));
+                c.setNombreRepresentanteLegal(rs.getString(4));
+                c.setApellidoRepresentanteLegal(rs.getString(5));
+                c.setTelefonoProveedor(rs.getString(6));
+                c.setCorreoProveedor(rs.getString(7));
+                ProveedorEncontrado.add(c);
+            }
+            stm.close();
+            rs.close();
+            co.close();
+        } catch (SQLException e) {
+            System.out.println("Error:" + e.getMessage());
+        }
+        return ProveedorEncontrado;
+    }
+
+    public List<Proveedores> getTelefonoProveedor(String TelefonoProveedor) {
+        List<Proveedores> ProveedorEncontrado = new ArrayList<>();
+        String sql = "SELECT * FROM ejercicio.persona WHERE telefono LIKE \"%" + TelefonoProveedor + "%\"";
+        try {
+            Connection co = new Conexion().conectarBaseDatos();
+            Statement stm = co.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                Proveedores c = new Proveedores();
+                c.setRuc(rs.getString(1));
+                c.setRazonSocial(rs.getString(2));
+                c.setTipoActividad(rs.getString(3));
+                c.setNombreRepresentanteLegal(rs.getString(4));
+                c.setApellidoRepresentanteLegal(rs.getString(5));
+                c.setTelefonoProveedor(rs.getString(6));
+                c.setCorreoProveedor(rs.getString(7));
+                ProveedorEncontrado.add(c);
+            }
+            stm.close();
+            rs.close();
+            co.close();
+        } catch (SQLException e) {
+            System.out.println("Error:" + e.getMessage());
+        }
+        return ProveedorEncontrado;
+    }
+     public List<Proveedores> getCorreoProveedor(String CorreoProveedor) {
+        List<Proveedores> ProveedorEncontrado = new ArrayList<>();
+        String sql = "SELECT * FROM ejercicio.persona WHERE telefono LIKE \"%" + CorreoProveedor + "%\"";
+        try {
+            Connection co = new Conexion().conectarBaseDatos();
+            Statement stm = co.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                Proveedores c = new Proveedores();
+                c.setRuc(rs.getString(1));
+                c.setRazonSocial(rs.getString(2));
+                c.setTipoActividad(rs.getString(3));
+                c.setNombreRepresentanteLegal(rs.getString(4));
+                c.setApellidoRepresentanteLegal(rs.getString(5));
+                c.setTelefonoProveedor(rs.getString(6));
+                c.setCorreoProveedor(rs.getString(7));
+                ProveedorEncontrado.add(c);
+            }
+            stm.close();
+            rs.close();
+            co.close();
+        } catch (SQLException e) {
+            System.out.println("Error:" + e.getMessage());
+        }
+        return ProveedorEncontrado;
     }
 }

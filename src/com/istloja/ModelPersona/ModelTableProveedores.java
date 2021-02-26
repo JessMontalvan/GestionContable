@@ -52,9 +52,9 @@ public class ModelTableProveedores extends AbstractTableModel {
             case 4:
                 return proveedor.getApellidoRepresentanteLegal();
             case 5:
-                return proveedor.getTelefono();
+                return proveedor.getTelefonoProveedor();
             case 6:
-                return proveedor.getCorreo();
+                return proveedor.getCorreoProveedor();
         }
         return new String();
     }
