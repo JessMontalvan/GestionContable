@@ -51,7 +51,7 @@ public class Proveedoresbd {
         // retorno del metodo cuando se realice la actualizacion
         boolean actualizar = false;
         //Contatenando la opcion de actualizacion
-        String sql = "UPDATE `ejercicio`.`proveedores` SET `ruc` = '"+proveedor.getRuc()+"', `razon_social` = '"+proveedor.getRazonSocial()+"', `tipo_actividad` = '"+proveedor.getTipoActividad()+"', `nombre_representante_legal` = '"+proveedor.getNombreRepresentanteLegal()+"', `apellido_representante_legal` = '"+proveedor.getApellidoRepresentanteLegal()+"', `telefono` = '"+proveedor.getTelefonoProveedor()+"', `correo` = '"+proveedor.getCorreoProveedor()+"' WHERE (`idproveedores` = '"+proveedor.getIdProveedores()+"');";
+        String sql = "UPDATE `ejercicio`.`proveedores` SET `ruc` = '"+proveedor.getRuc()+"', `razon_social` = '"+proveedor.getRazonSocial()+"', `tipo_actividad` = '"+proveedor.getTipoActividad()+"', `nombre_representante_legal` = '"+proveedor.getNombreRepresentanteLegal()+"', `apellido_representante_legal` = '"+proveedor.getApellidoRepresentanteLegal()+"', `telefono_proveedor` = '"+proveedor.getTelefonoProveedor()+"', `correo_proveedor` = '"+proveedor.getCorreoProveedor()+"' WHERE (`idproveedores` = '"+proveedor.getIdProveedores()+"');";
         try {
             Conexion con = new Conexion();
             connect = con.conectarBaseDatos();
@@ -115,7 +115,7 @@ public class Proveedoresbd {
     public List<Proveedores> getProveedorRuc (String ruc) {
 
         List<Proveedores> ProveedorEncontrado = new ArrayList<>();
-        String sql = "SELECT * FROM ejercicio.persona WHERE cedula LIKE \"%" + ruc + "%\"";
+        String sql = "SELECT * FROM ejercicio.proveedores WHERE ruc LIKE \"%" + ruc + "%\"";
         try {
             
             Connection co = new Conexion().conectarBaseDatos();
@@ -144,7 +144,7 @@ public class Proveedoresbd {
     public List<Proveedores> getProveedorRazonSocial (String RazonSocial) {
 
         List<Proveedores> ProveedorEncontrado = new ArrayList<>();
-        String sql = "SELECT * FROM ejercicio.persona WHERE nombres LIKE \"%" + RazonSocial + "%\"";
+        String sql = "SELECT * FROM ejercicio.proveedores WHERE razon_social LIKE \"%" + RazonSocial + "%\"";
         try {
            Connection co = new Conexion().conectarBaseDatos();
             Statement stm = co.createStatement();
@@ -172,7 +172,7 @@ public class Proveedoresbd {
     public List<Proveedores> getTipoActividad(String TipoActividad) {
 
         List<Proveedores> ProveedorEncontrado = new ArrayList<>();
-        String sql = "SELECT * FROM ejercicio.persona WHERE apellidos LIKE \"%" + TipoActividad + "%\"";
+        String sql = "SELECT * FROM ejercicio.proveedores WHERE tipo_actividad LIKE \"%" + TipoActividad + "%\"";
         try {
             Connection co = new Conexion().conectarBaseDatos();
             Statement stm = co.createStatement();
@@ -200,7 +200,7 @@ public class Proveedoresbd {
     public List<Proveedores> getNombreRepresentante (String NombreRepresentante) {
 
         List<Proveedores> ProveedorEncontrado = new ArrayList<>();
-        String sql = "SELECT * FROM ejercicio.persona WHERE direccion LIKE \"%" + NombreRepresentante + "%\"";
+        String sql = "SELECT * FROM ejercicio.proveedores WHERE nombre_representante_legal LIKE \"%" + NombreRepresentante + "%\"";
         try {
             Connection co = new Conexion().conectarBaseDatos();
             Statement stm = co.createStatement();
@@ -228,7 +228,7 @@ public class Proveedoresbd {
     public List<Proveedores> getApellidoRepresentante(String ApellidoRepresentante) {
         
         List<Proveedores> ProveedorEncontrado = new ArrayList<>();
-        String sql = "SELECT * FROM ejercicio.persona WHERE correo LIKE \"%" + ApellidoRepresentante + "%\"";
+        String sql = "SELECT * FROM ejercicio.proveedores WHERE apellido_representante_legal LIKE \"%" + ApellidoRepresentante + "%\"";
         try {
             Connection co = new Conexion().conectarBaseDatos();
             Statement stm = co.createStatement();
@@ -255,7 +255,7 @@ public class Proveedoresbd {
 
     public List<Proveedores> getTelefonoProveedor(String TelefonoProveedor) {
         List<Proveedores> ProveedorEncontrado = new ArrayList<>();
-        String sql = "SELECT * FROM ejercicio.persona WHERE telefono LIKE \"%" + TelefonoProveedor + "%\"";
+        String sql = "SELECT * FROM ejercicio.proveedores WHERE telefono_proveedor LIKE \"%" + TelefonoProveedor + "%\"";
         try {
             Connection co = new Conexion().conectarBaseDatos();
             Statement stm = co.createStatement();
@@ -281,7 +281,7 @@ public class Proveedoresbd {
     }
      public List<Proveedores> getCorreoProveedor(String CorreoProveedor) {
         List<Proveedores> ProveedorEncontrado = new ArrayList<>();
-        String sql = "SELECT * FROM ejercicio.persona WHERE telefono LIKE \"%" + CorreoProveedor + "%\"";
+        String sql = "SELECT * FROM ejercicio.proveedores WHERE correo_proveedor LIKE \"%" + CorreoProveedor + "%\"";
         try {
             Connection co = new Conexion().conectarBaseDatos();
             Statement stm = co.createStatement();

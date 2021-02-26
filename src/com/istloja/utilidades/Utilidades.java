@@ -82,5 +82,17 @@ public class Utilidades {
             return false;
         }        
     }
-
+ public boolean validarCodigo(String numero){
+        if (numero.isEmpty()) {
+            return false;
+        }else if (numero.length()<10) {
+            return false;
+        }
+        try {
+            int validarNumero=Integer.parseInt(numero);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

@@ -207,8 +207,9 @@ public void guardarPersona() {
             personaEditar.setIdPersona(personaEditar.getIdPersona());
             if (controladorPersona.eliminar(personaEditar)) {
                 JOptionPane.showMessageDialog(rootPane, "Persona eliminada con exito del sitema.");
-                gestionPersona.limpiar();
                 ModelTablePersona.fireTableDataChanged();
+                gestionPersona.limpiar();
+                
                 personaEditar = null;
             } else {
                 JOptionPane.showMessageDialog(rootPane, "No se puede eliminar a la persona", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -1168,12 +1169,12 @@ public void guardarPersona() {
         inventario.setCantidadProducto(txtCantidadProducto.getText());
        
          if (controladorInventario.crearProducto(inventario)) {
-            JOptionPane.showMessageDialog(rootPane, "Proveedor guardado con éxito del sitema.");
+            JOptionPane.showMessageDialog(rootPane, "Producto guardado con éxito del sitema.");
             limpiarInventario();
             modelTableInventario.setInventario(controladorInventario.obtenerProductos());
             modelTableInventario.fireTableDataChanged();
         } else {
-            JOptionPane.showMessageDialog(rootPane, "No se puede guardar el proveedor.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "No se puede guardar el Producto.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
 
         

@@ -29,7 +29,7 @@ public class Inventariobd {
     public boolean crearProducto(Inventario inventario) {
         boolean registrar = false;
 
-        String sql = "INSERT INTO inventario (idinventario, codigo_pro, descripcion, precio_compra, precio_venta, can_productos) VALUES('" + String.valueOf(inventario.getIdInventario()) + "', '" + inventario.getCodigoProducto() + "', '" + inventario.getDescripcion() + "', '" + inventario.getPrecioCompra() + "', '" + inventario.getPrecioVenta() + "', '" + inventario.getCantidadProducto() + "')";
+        String sql = "INSERT INTO inventario ( codigo_pro, descripcion, precio_compra, precio_venta, can_productos) VALUES('" + String.valueOf(inventario.getIdInventario()) + "', '" + inventario.getCodigoProducto() + "', '" + inventario.getDescripcion() + "', '" + inventario.getPrecioCompra() + "', '" + inventario.getPrecioVenta() + "', '" + inventario.getCantidadProducto() + "')";
         try {
             Conexion conexion = new Conexion();
             con = conexion.conectarBaseDatos();

@@ -106,7 +106,7 @@ public class GestionInventario {
             txtCodigoProducto.requestFocus();// Sirve para ubicar el cursor en un campo vacio.
             return null;
         }
-        if (!utilidades.validadorDeCedula(txtCodigoProducto.getText())) {
+        if (!utilidades.validarCodigo(txtCodigoProducto.getText())) {
             JOptionPane.showMessageDialog(frameGestionContable, "El Código ingresado no es valido", "ERROR", JOptionPane.ERROR_MESSAGE);
             return null;
         }
