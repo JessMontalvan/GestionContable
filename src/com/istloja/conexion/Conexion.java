@@ -17,7 +17,7 @@ public class Conexion {
     //declaramos los dadtos de conexion
     private static final String user = "root";
     private static final String pass = "jssnoe02";
-    private static final String url = "jdbc:mysql://localhost:3306/ejerciciobd? useUnicode=true&use"
+    private static final String url = "jdbc:mysql://localhost:3306/ejercicio? useUnicode=true&use"
             + " JDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 
     public Connection conectarBaseDatos() {

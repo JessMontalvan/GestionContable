@@ -5,10 +5,14 @@
  */
 package com.istloja.ModelPersona;
 
+import com.istloja.modelo.Persona;
+import com.istloja.modelo.Proveedores;
+
 /**
  *
  * @author jssmontalvan
  */
-public interface ComunicacionPersona {
-    
+public interface ComunicacionVistasModelosTablas {
+     void clickPersona (Persona p);
+     void clickProveedores (Proveedores p);
 }
